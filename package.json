@@ -1,0 +1,47 @@
+{
+  "name": "hijri-gregorian-date-picker",
+  "version": "1.0.0",
+  "description": "A simple and reusable react component for both gregorian hijir date picker",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "parcel src/demo/index.html",
+    "build": "parcel build src/lib/index.js -d build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omarjomai/hijri-gregorian-date-picker.git"
+  },
+  "author": {
+    "name": "Jemaiomar",
+    "email": "mrjomaiomar@gmail.com",
+    "url": "https://github.com/omarjomai"
+  },
+  "bugs": {
+    "url": "https://github.com/omarjomai/hijri-gregorian-date-picker/issues"
+  },
+  "homepage": "https://github.com/omarjomai/hijri-gregorian-date-picker",
+  "keywords": [
+    "hijri-gregorian-date-picker",
+    "react",
+    "hijri",
+    "gregorian",
+    "datepicker",
+    "hijir-gregorian-datepicker"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "parcel-bundler": "^1.11.0",
+    "react": "^16.8.3",
+    "react-dev-utils": "^4.2.3",
+    "react-dom": "^16.8.3",
+    "react-onclickoutside": "^6.7.1",
+    "react-popper": "^1.3.0",
+    "reactive-elements": "^0.10.0"
+  },
+  "dependencies": {
+    "moment-hijri": "^2.1.1",
+    "styled-components": "^4.1.3"
+  }
+}
