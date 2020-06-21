@@ -9,7 +9,7 @@ import YearsList from './YearsList'
 import MonthDaysView from './MonthDaysView'
 
 const HijriCalender = styled.div`
-  width: 266px;
+  width: 300px;
   direction: rtl;
   background: #ffffff;
   padding: 15px;
@@ -20,8 +20,8 @@ const HijriCalender = styled.div`
   -webkit-box-sizing: unset;
   font-size: 14px;
   border-radius: 4px;
-  z-index: 1000;
   color: black !important;
+  z-index:1000;
 `
 
 const HijriCalenderControls = styled.div`
@@ -44,11 +44,10 @@ const ControlButton = styled.button`
   }
 `
 const PreviousButton = styled(ControlButton)`
-  right: 15px;
+
 `
 
 const NextButton = styled(ControlButton)`
-  left: 15px;
 `
 const MonthName = styled.strong`
 `
@@ -89,13 +88,13 @@ class HijriGregorianDatePicker extends Component {
   componentDidUpdate(prevProps) {
      const { selectedDate: prevSelectedDate } = prevProps;
      const { selectedDate: nextSelectedDate } = this.props;
-    // if (prevSelectedDate !== nextSelectedDate) {
-    //   let time = this.state.currentTime
-    //   time.iDate(nextSelectedDate)
-    //   const selectedDateg = time.format(this.state.dateFormatg)
+    if (prevSelectedDate !== nextSelectedDate) {
+      let time = this.state.currentTime
+      time.iDate(nextSelectedDate)
+      const selectedDateg = time.format(this.state.dateFormatg)
 
-    //    this.setState({ ...this.state, selectedDate: nextSelectedDate,selectedDateg })
-    //  }
+       this.setState({ ...this.state, selectedDate: nextSelectedDate,selectedDateg })
+     }
   }
 
   handleClickOutside = evt => {
@@ -190,32 +189,33 @@ class HijriGregorianDatePicker extends Component {
   render() {
     const { className, name, placeholder, input, disabled } = this.props;
     return (
-      <div>
+      <div >
         <Manager>
           <Reference>
             {({ ref }) => (
-              <div style={{width:600}} ref={ref}>
-              <input type="text" autoComplete="off" {...{ className, name, placeholder, disabled, ...input }} value={this.state.selectedDate}   onFocus={this.handleFocus} readOnly />
-              <input type="text" autoComplete="off" {...{ className, name, placeholder, disabled, ...input }} value={this.state.selectedDateg}  onFocus={this.handleFocus} readOnly />
-            </div>
+             
+              <input style={{width:"100%",textAlign:"center"}}  ref={ref} type="text" autoComplete="off" {...{ className, name, placeholder, disabled, ...input }} value={this.state.selectedDate?this.state.selectedDate+" - "+this.state.selectedDateg:""}   onFocus={this.handleFocus} readOnly />
+           
             )}
           </Reference>
+          
           {this.state.calenderShown &&
            <> 
            <Popper
-              placement="bottom-start"
+              placement="bottom"
               modifiers={{
                 hide: { enabled: true},
                 preventOverflow: { enabled: true, boundariesElement: 'viewport'}, 
               }}
             >
               {({ ref, style, placement, arrowProps }) => (
-                <div>
-                  <HijriCalender ref={ref} style={style} data-placement={placement}>
-                    <HijriCalenderControls>
-                      <PreviousButton onClick={this.subtractMonth} type="button" >{'<'}</PreviousButton>
-                      <MonthName>{this.state.currentTime.format('iMMMM') + ' ('+this.state.currentTime.format('iMM')+') ' + this.state.currentTime.format('iYYYY')}</MonthName>
-                      <NextButton onClick={this.addMonth} type="button" > {'>'} </NextButton>
+              <div style={{display: "flex",flexDirection: "row",justifyContent: "center",position: "absolute",  zIndex: 1000,backgroundColor:"transparent"}} data-placement={placement}  ref={ref} > 
+             
+                  <HijriCalender style={{display: "inline-block"}}  >
+                    <HijriCalenderControls >
+                      <button className="btn" onClick={this.subtractMonth} type="button" >{'<'}</button>
+                      <MonthName> {this.state.currentTime.format('iMMMM') + ' ('+this.state.currentTime.format('iMM')+') ' + this.state.currentTime.format('iYYYY')} </MonthName>
+                      <button className="btn" onClick={this.addMonth} type="button" > {'>'} </button>
                       {/* {this.props.quickSelect &&
                         <YearAndMonthList>
                           <YearsList currentTime={this.state.currentTime} onChange={this.handelYearChange}/>
@@ -228,10 +228,23 @@ class HijriGregorianDatePicker extends Component {
                     <MonthDaysView g={false} currentTime={this.state.currentTime} dateFormat={this.state.dateFormat} selectedDate={this.state.selectedDate} setSelectedDate={this.setSelectedDate}/>
                     <div ref={arrowProps.ref} style={arrowProps.style} />
                   </HijriCalender>
-                </div>
+               
+                 <HijriCalender style={{display: "inline-block"}}  >
+                   <HijriCalenderControls>
+                     <button className="btn" onClick={this.subtractMonthg} type="button" >{'<'}</button>
+                     <MonthName>{this.state.currentTimeg.format('MMMM') + ' ('+this.state.currentTimeg.format('MM')+') ' + this.state.currentTimeg.format('YYYY')}</MonthName>
+                     <button className="btn" onClick={this.addMonthg} type="button" > {'>'} </button>
+                   
+                   </HijriCalenderControls>
+                   <DayNames />
+                   <MonthDaysView g={true} currentTime={this.state.currentTimeg} dateFormat={this.state.dateFormatg} selectedDate={this.state.selectedDateg} setSelectedDate={this.setSelectedDateg}/>
+                   <div ref={arrowProps.ref} style={arrowProps.style} />
+                 </HijriCalender>
+               
+               </div> 
               )}
             </Popper>
-            <Popper
+            {/* <Popper
               placement="bottom-end"
               modifiers={{
                 hide: { enabled: true},
@@ -245,13 +258,7 @@ class HijriGregorianDatePicker extends Component {
                       <PreviousButton onClick={this.subtractMonthg} type="button" >{'<'}</PreviousButton>
                       <MonthName>{this.state.currentTimeg.format('MMMM') + ' ('+this.state.currentTimeg.format('MM')+') ' + this.state.currentTimeg.format('YYYY')}</MonthName>
                       <NextButton onClick={this.addMonthg} type="button" > {'>'} </NextButton>
-                      {/* {this.props.quickSelect &&
-                        <YearAndMonthList>
-                          <YearsList currentTime={this.state.currentTime} onChange={this.handelYearChange}/>
-                          <MonthList currentTime={this.state.currentTime} onChange={this.handelMonthChange}/>
-                        </YearAndMonthList>
-                      } */}
-                      
+                    
                     </HijriCalenderControls>
                     <DayNames />
                     <MonthDaysView g={true} currentTime={this.state.currentTimeg} dateFormat={this.state.dateFormatg} selectedDate={this.state.selectedDateg} setSelectedDate={this.setSelectedDateg}/>
@@ -259,9 +266,11 @@ class HijriGregorianDatePicker extends Component {
                   </HijriCalender>
                 </div>
               )}
-            </Popper>
+            </Popper> */}
+          
           </>
           }
+         
         </Manager>
       </div>
     )

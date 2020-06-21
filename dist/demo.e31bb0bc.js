@@ -44652,7 +44652,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  left: 15px;\n"]);
+  var data = _taggedTemplateLiteral(["\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -44662,7 +44662,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  right: 15px;\n"]);
+  var data = _taggedTemplateLiteral(["\n\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -44692,7 +44692,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  width: 266px;\n  direction: rtl;\n  background: #ffffff;\n  padding: 15px;\n  border: 1px solid #ddd;\n  margin-top: 2px;\n  font-family: serif;\n  box-sizing: unset;\n  -webkit-box-sizing: unset;\n  font-size: 14px;\n  border-radius: 4px;\n  z-index: 1000;\n  color: black !important;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 300px;\n  direction: rtl;\n  background: #ffffff;\n  padding: 15px;\n  border: 1px solid #ddd;\n  margin-top: 2px;\n  font-family: serif;\n  box-sizing: unset;\n  -webkit-box-sizing: unset;\n  font-size: 14px;\n  border-radius: 4px;\n  color: black !important;\n  z-index:1000;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -44853,12 +44853,17 @@ var HijriGregorianDatePicker = /*#__PURE__*/function (_Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       var prevSelectedDate = prevProps.selectedDate;
-      var nextSelectedDate = this.props.selectedDate; // if (prevSelectedDate !== nextSelectedDate) {
-      //   let time = this.state.currentTime
-      //   time.iDate(nextSelectedDate)
-      //   const selectedDateg = time.format(this.state.dateFormatg)
-      //    this.setState({ ...this.state, selectedDate: nextSelectedDate,selectedDateg })
-      //  }
+      var nextSelectedDate = this.props.selectedDate;
+
+      if (prevSelectedDate !== nextSelectedDate) {
+        var time = this.state.currentTime;
+        time.iDate(nextSelectedDate);
+        var selectedDateg = time.format(this.state.dateFormatg);
+        this.setState(_objectSpread(_objectSpread({}, this.state), {}, {
+          selectedDate: nextSelectedDate,
+          selectedDateg: selectedDateg
+        }));
+      }
     }
   }, {
     key: "render",
@@ -44873,12 +44878,12 @@ var HijriGregorianDatePicker = /*#__PURE__*/function (_Component) {
           disabled = _this$props.disabled;
       return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactPopper.Manager, null, /*#__PURE__*/_react.default.createElement(_reactPopper.Reference, null, function (_ref) {
         var ref = _ref.ref;
-        return /*#__PURE__*/_react.default.createElement("div", {
+        return /*#__PURE__*/_react.default.createElement("input", _extends({
           style: {
-            width: 600
+            width: "100%",
+            textAlign: "center"
           },
-          ref: ref
-        }, /*#__PURE__*/_react.default.createElement("input", _extends({
+          ref: ref,
           type: "text",
           autoComplete: "off"
         }, _objectSpread({
@@ -44887,24 +44892,12 @@ var HijriGregorianDatePicker = /*#__PURE__*/function (_Component) {
           placeholder: placeholder,
           disabled: disabled
         }, input), {
-          value: _this2.state.selectedDate,
+          value: _this2.state.selectedDate ? _this2.state.selectedDate + " - " + _this2.state.selectedDateg : "",
           onFocus: _this2.handleFocus,
           readOnly: true
-        })), /*#__PURE__*/_react.default.createElement("input", _extends({
-          type: "text",
-          autoComplete: "off"
-        }, _objectSpread({
-          className: className,
-          name: name,
-          placeholder: placeholder,
-          disabled: disabled
-        }, input), {
-          value: _this2.state.selectedDateg,
-          onFocus: _this2.handleFocus,
-          readOnly: true
-        })));
+        }));
       }), this.state.calenderShown && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactPopper.Popper, {
-        placement: "bottom-start",
+        placement: "bottom",
         modifiers: {
           hide: {
             enabled: true
@@ -44919,17 +44912,26 @@ var HijriGregorianDatePicker = /*#__PURE__*/function (_Component) {
             style = _ref2.style,
             placement = _ref2.placement,
             arrowProps = _ref2.arrowProps;
-        return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(HijriCalender, {
-          ref: ref,
-          style: style,
-          "data-placement": placement
-        }, /*#__PURE__*/_react.default.createElement(HijriCalenderControls, null, /*#__PURE__*/_react.default.createElement(PreviousButton, {
+        return /*#__PURE__*/_react.default.createElement("div", {
+          style: {
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            position: "absolute",
+            zIndex: 1000,
+            backgroundColor: "transparent"
+          },
+          "data-placement": placement,
+          ref: ref
+        }, /*#__PURE__*/_react.default.createElement(HijriCalender, {
+          style: {
+            display: "inline-block"
+          }
+        }, /*#__PURE__*/_react.default.createElement(HijriCalenderControls, null, /*#__PURE__*/_react.default.createElement("button", {
+          className: "btn",
           onClick: _this2.subtractMonth,
           type: "button"
-        }, '<'), /*#__PURE__*/_react.default.createElement(MonthName, null, _this2.state.currentTime.format('iMMMM') + ' (' + _this2.state.currentTime.format('iMM') + ') ' + _this2.state.currentTime.format('iYYYY')), /*#__PURE__*/_react.default.createElement(NextButton, {
-          onClick: _this2.addMonth,
-          type: "button"
-        }, " ", '>', " ")), /*#__PURE__*/_react.default.createElement(_DayNames.default, null), /*#__PURE__*/_react.default.createElement(_MonthDaysView.default, {
+        }, '<'), /*#__PURE__*/_react.default.createElement(MonthName, null, " ", _this2.state.currentTime.format('iMMMM') + ' (' + _this2.state.currentTime.format('iMM') + ') ' + _this2.state.currentTime.format('iYYYY'), " ")), /*#__PURE__*/_react.default.createElement(_DayNames.default, null), /*#__PURE__*/_react.default.createElement(_MonthDaysView.default, {
           g: false,
           currentTime: _this2.state.currentTime,
           dateFormat: _this2.state.dateFormat,
@@ -44938,31 +44940,16 @@ var HijriGregorianDatePicker = /*#__PURE__*/function (_Component) {
         }), /*#__PURE__*/_react.default.createElement("div", {
           ref: arrowProps.ref,
           style: arrowProps.style
-        })));
-      }), /*#__PURE__*/_react.default.createElement(_reactPopper.Popper, {
-        placement: "bottom-end",
-        modifiers: {
-          hide: {
-            enabled: true
-          },
-          preventOverflow: {
-            enabled: true,
-            boundariesElement: 'viewport'
+        })), /*#__PURE__*/_react.default.createElement(HijriCalender, {
+          style: {
+            display: "inline-block"
           }
-        }
-      }, function (_ref3) {
-        var ref = _ref3.ref,
-            style = _ref3.style,
-            placement = _ref3.placement,
-            arrowProps = _ref3.arrowProps;
-        return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(HijriCalender, {
-          ref: ref,
-          style: style,
-          "data-placement": placement
-        }, /*#__PURE__*/_react.default.createElement(HijriCalenderControls, null, /*#__PURE__*/_react.default.createElement(PreviousButton, {
+        }, /*#__PURE__*/_react.default.createElement(HijriCalenderControls, null, /*#__PURE__*/_react.default.createElement("button", {
+          className: "btn",
           onClick: _this2.subtractMonthg,
           type: "button"
-        }, '<'), /*#__PURE__*/_react.default.createElement(MonthName, null, _this2.state.currentTimeg.format('MMMM') + ' (' + _this2.state.currentTimeg.format('MM') + ') ' + _this2.state.currentTimeg.format('YYYY')), /*#__PURE__*/_react.default.createElement(NextButton, {
+        }, '<'), /*#__PURE__*/_react.default.createElement(MonthName, null, _this2.state.currentTimeg.format('MMMM') + ' (' + _this2.state.currentTimeg.format('MM') + ') ' + _this2.state.currentTimeg.format('YYYY')), /*#__PURE__*/_react.default.createElement("button", {
+          className: "btn",
           onClick: _this2.addMonthg,
           type: "button"
         }, " ", '>', " ")), /*#__PURE__*/_react.default.createElement(_DayNames.default, null), /*#__PURE__*/_react.default.createElement(_MonthDaysView.default, {
@@ -45215,7 +45202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52561" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59681" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

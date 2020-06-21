@@ -1,6 +1,6 @@
 {
   "name": "hijri-gregorian-date-picker",
-  "version": "1.0.0",
+  "version": "1.2.7",
   "description": "A simple and reusable react component for both gregorian hijir date picker",
   "main": "build/index.js",
   "scripts": {
