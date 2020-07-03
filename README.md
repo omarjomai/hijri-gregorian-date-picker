@@ -17,6 +17,6 @@ import React from  'react';
 import ReactDOM from  'react-dom';
 import HijriGregorianDatePicker from 'hijri-gregorian-date-picker';
 
-ReactDOM.render(<HijriDatePicker inputName="hijri_gregorian_date" className="form-control" selectedDate="1439/08/02"  />, document.getElementById('root'));
+ReactDOM.render(<HijriGregorianDatePicker placeholder="hijri_gregorian_date" className="form-control" selectedDate="1440/09/05"  />, document.getElementById('root'));
 
 ```
