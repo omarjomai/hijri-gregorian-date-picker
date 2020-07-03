@@ -1,5 +1,3 @@
-# hijri-gregorian-date-picker
-
 # React Hijri Gregorian DatePicker
 A simple and reusble react component for Both hijiri and gregorian date picker.
 
