@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import HijriGregorianDatePicker from '../lib';
-import './ExampleStyle.css';
+import React, { Component } from "react";
+import HijriGregorianDatePicker from "../lib";
+import "./ExampleStyle.css";
 
 class App extends Component {
   state = {
-    selectedDate: '01/11/1440'
-  }
+    selectedDate: "2020-08-06 10:00:00",
+  };
 
   onChange = (value) => {
-    console.log('OnChange -> Value is: ', value)
-    this.setState({ selectedDate: value })
-  }
+    console.log("OnChange -> Value is: ", value);
+    this.setState({ selectedDate: value });
+  };
 
   onFocus = (value) => {
-    console.log('OnFocus -> Value is: ', value)
-  }
+    console.log("OnFocus -> Value is: ", value);
+  };
 
   render() {
     return (
@@ -27,7 +27,11 @@ class App extends Component {
           dateFormat="iDD/iMM/iYYYY"
           onChange={this.onChange}
           onFocus={this.onFocus}
-          
+          withtime={true}
+          onChange={(v) => {
+            console.log(v);
+          }}
+          styleInput={{ textAlign: "left" }}
         />
       </div>
     );
