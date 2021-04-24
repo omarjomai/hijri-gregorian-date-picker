@@ -79,7 +79,6 @@ class HijriGregorianDatePicker extends Component {
       let timeh = moment(selectedDateg, this.state.dateFormatg);
       const selectedDate = timeh.format(this.state.dateFormat);
       const mytime = format(this.props.selectedDate, "HH:mm");
-      console.log(time);
       this.setState({
         currentTime: moment(selectedDateg, this.state.dateFormatg),
         currentTimeg: moment(selectedDateg, this.state.dateFormatg),
@@ -113,9 +112,7 @@ class HijriGregorianDatePicker extends Component {
 
   subtractMonth = () => {
     this.setState((prevState) => {
-      console.log("prevState", prevState);
       let plus = prevState.currentTime.subtract(1, "imonth");
-      console.log("plus", plus);
       return {
         currentTime: plus,
       };
@@ -124,9 +121,7 @@ class HijriGregorianDatePicker extends Component {
   subtractMonthg = () => {
     this.setState((prevState) => {
       let dates = prevState.currentTimeg;
-      console.log("prevState", dates.format("DD-MM-YYYY"));
       let plus = dates.subtract(1, "months");
-      console.log("plus", plus.format("DD-MM-YYYY"));
       return {
         currentTimeg: plus,
       };
@@ -135,21 +130,16 @@ class HijriGregorianDatePicker extends Component {
 
   addMonth = () => {
     this.setState((prevState) => {
-      console.log("prevState", prevState);
       let plus = prevState.currentTime.add(1, "imonth");
-      console.log("plus", plus);
       return {
         currentTime: plus,
       };
     });
   };
   addMonthg = () => {
-    console.log("addddd");
     this.setState((prevState) => {
       let dates = prevState.currentTimeg;
-      console.log("dates", dates.format("DD-MM-YYYY"));
       let plus = dates.add(1, "months");
-      console.log("plus", plus.format("DD-MM-YYYY"));
       return {
         currentTimeg: plus,
       };
@@ -325,12 +315,6 @@ class HijriGregorianDatePicker extends Component {
                             {" "}
                             {">"}{" "}
                           </button>
-                          {/* {this.props.quickSelect &&
-                        <YearAndMonthList>
-                          <YearsList currentTime={this.state.currentTime} onChange={this.handelYearChange}/>
-                          <MonthList currentTime={this.state.currentTime} onChange={this.handelMonthChange}/>
-                        </YearAndMonthList>
-                      } */}
                         </HijriCalenderControls>
                         <DayNames />
                         <MonthDaysView
@@ -393,29 +377,6 @@ class HijriGregorianDatePicker extends Component {
                   </div>
                 )}
               </Popper>
-              {/* <Popper
-              placement="bottom-end"
-              modifiers={{
-                hide: { enabled: true},
-                preventOverflow: { enabled: true, boundariesElement: 'viewport'}, 
-              }}
-            >
-              {({ ref, style, placement, arrowProps }) => (
-                <div>
-                  <HijriCalender ref={ref} style={style} data-placement={placement}>
-                    <HijriCalenderControls>
-                      <PreviousButton onClick={this.subtractMonthg} type="button" >{'<'}</PreviousButton>
-                      <MonthName>{this.state.currentTimeg.format('MMMM') + ' ('+this.state.currentTimeg.format('MM')+') ' + this.state.currentTimeg.format('YYYY')}</MonthName>
-                      <NextButton onClick={this.addMonthg} type="button" > {'>'} </NextButton>
-                    
-                    </HijriCalenderControls>
-                    <DayNames />
-                    <MonthDaysView g={true} currentTime={this.state.currentTimeg} dateFormat={this.state.dateFormatg} selectedDate={this.state.selectedDateg} setSelectedDate={this.setSelectedDateg}/>
-                    <div ref={arrowProps.ref} style={arrowProps.style} />
-                  </HijriCalender>
-                </div>
-              )}
-            </Popper> */}
             </>
           )}
         </Manager>
